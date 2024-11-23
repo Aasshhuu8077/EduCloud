@@ -3,10 +3,11 @@ import dotenv from "dotenv"
 import { connectDB } from './Database/db.js';
 import { User } from './model/userschema.js';
 
-dotenv.config();
-const app = express();
 
-const port = 8080;
+const app = express();
+app.use(express.json());
+dotenv.config();
+const port = 8120;
 app.use(express.json());
 
 app.get("/" , (req,res)=>{

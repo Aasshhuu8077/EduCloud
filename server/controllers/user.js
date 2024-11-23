@@ -78,3 +78,36 @@ message:"Invalid OTP",
     })
 
 })
+
+export const loginUser = TryCatch(async(req,res)=>{
+    const {email , password} = req.body;
+
+    const user = await User.findOne({email});
+
+    if(!user)
+        return res.status(400).json({
+        message:"No user Found"
+        });
+
+        const matchpassword = await bcrypt.compare(password , user.password);
+        if(!matchpassword)
+            return res.status(400).json({
+                message:"Wrong Password"
+            });
+
+            const token =  jwt.sign({_id: user._id} , process.env.Jwt_Sec , {
+                expiresIn:"15d"
+            });
+
+            res.json({
+                message:`Welcome Back ${user.name}`,
+                token,
+                user
+            })
+
+})
+
+export const myprofile = TryCatch(async(req,res)=>{
+    const user = await User.findById(req.user._id)
+    res.json({user})
+})
