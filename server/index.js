@@ -17,11 +17,14 @@ app.get("/" , (req,res)=>{
 
 // importing the routes
 import userRoutes from './routes/user.js'
-
+import courseRoutes from './routes/course.js'
+import adminRoutes from './routes/admin.js'
 
 
 // using the routes
 app.use('/api' , userRoutes);
+app.use('/api' , courseRoutes);
+app.use('/api' , adminRoutes);
 
 
 
