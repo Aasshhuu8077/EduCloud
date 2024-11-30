@@ -14,6 +14,7 @@ app.get("/" , (req,res)=>{
     res.send("Hello World");
 })
 
+app.use("/uploads",express.static("uploads"))
 
 // importing the routes
 import userRoutes from './routes/user.js'

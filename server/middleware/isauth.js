@@ -26,8 +26,9 @@ export const isAdmin  = (req,res,next)=>{
             return res.status(403).json({
                 message:"You are not an admin"
                 })
-                next();
+               
     }
+    next();
  } catch(error){
         res.status(500).json({
             message:error.message,
