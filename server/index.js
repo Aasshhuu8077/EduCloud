@@ -1,14 +1,23 @@
 import express from 'express'
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 import { connectDB } from './Database/db.js';
+import Razorpay from 'razorpay'
 import { User } from './model/userschema.js';
+import cors from "cors"
 
+const port = 8120;
+export const instance = new Razorpay({
+    key_id: "rzp_test_5a8w8amerefgtu",
+    key_secret: "fyy3I4Slnx89pOyfkKBJjxaK",
+})
 
 const app = express();
 app.use(express.json());
 dotenv.config();
-const port = 8120;
+
 app.use(express.json());
+app.use(cors()); // to establish 
+
 
 app.get("/" , (req,res)=>{
     res.send("Hello World");
@@ -49,7 +58,10 @@ app.use('/api' , adminRoutes);
 
 
 
+
+
+
 app.listen(port ,()=>{
-    console.log('server is running on port 8080')
+    console.log('server is running')
     connectDB();
 })
